@@ -1,0 +1,33 @@
+::ng-deep #grid-container {
+  height: 600px;
+  text-align: center;
+}
+// search
+::ng-deep .dx-toolbar-before {
+  width: 60%;
+  .dx-datagrid-search-panel {
+    width: 100% !important;
+    margin-top: 5px;
+  }
+}
+// checkbox
+::ng-deep
+  .dx-datagrid-rowsview
+  .dx-select-checkboxes-hidden
+  > tbody
+  > tr
+  > td
+  > .dx-select-checkbox {
+  display: block;
+}
+::ng-deep .dx-datagrid-checkbox-size .dx-checkbox-icon {
+  height: 16px;
+  width: 16px;
+  margin: 0 auto;
+}
+// language col
+
+// algin text
+::ng-deep .dx-data-row td {
+  text-align: center !important;
+}
