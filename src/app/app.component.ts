@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { IMovie } from './model/movie';
+import { ACTION_BUTTON, IMovie } from './model/movie';
 import { MovieService } from 'src/services/movie.service';
 import { Toolbar } from 'devextreme/ui/data_grid';
 import { DxDataGridComponent } from 'devextreme-angular';
@@ -16,7 +16,35 @@ export class AppComponent implements OnInit, AfterViewInit {
   movieList!: Array<IMovie>;
   filteredMovie!: Array<IMovie>;
   readonly allowedPageSizes = [5, 10, 'all'];
-  constructor(private _movieService: MovieService) {}
+  moreInfoButtonOptions: any;
+  actionButtons = ACTION_BUTTON;
+  dataSource: any;
+
+  constructor(private _movieService: MovieService) {
+    this.dataSource = [
+      {
+        text: 'Share',
+        icon: 'dx-icon-globe',
+        items: [{ text: 'Facebook' }, { text: 'Twitter' }],
+      },
+      { text: 'Download', icon: 'dx-icon-download' },
+      { text: 'Add Comment', icon: 'dx-icon-add' },
+      { text: 'Add to Favorite', icon: 'dx-icon-favorites' },
+    ];
+    this.closeButtonOptions = {
+      text: 'Close',
+      onClick() {
+        this.popupVisible = false;
+      },
+    };
+
+    this.moreInfoButtonOptions = {
+      text: 'More info',
+      onClick(e: any) {
+        const message = `More info about`;
+      },
+    };
+  }
   ngOnInit(): void {
     this.getMovie();
   }
@@ -41,7 +69,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       e.cellElement.style.background =
         e.data.original_language === 'en' ? 'green' : 'red';
     }
-    console.log(e.column.dataField);
   }
 
   onToolbarPreparing(e: any) {
@@ -52,28 +79,19 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  contextMenuItems = [
+    { text: 'Zoom In', icon: 'plus' },
+    { text: 'Share', icon: 'message' },
+    { text: 'Download', icon: 'download' },
+  ];
+  isContextMenuVisible = false;
+
   //
   @ViewChild(DxDataGridComponent, { static: false })
   dataGrid!: DxDataGridComponent;
 
   MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
-
-  dataSource: any = {
-    store: {
-      type: 'odata',
-      url: 'https://js.devexpress.com/Demos/DevAV/odata/Tasks',
-      key: 'Task_ID',
-    },
-    expand: 'ResponsibleEmployee',
-    select: [
-      'Task_ID',
-      'Task_Subject',
-      'Task_Start_Date',
-      'Task_Due_Date',
-      'Task_Status',
-      'ResponsibleEmployee/Employee_Full_Name',
-    ],
-  };
 
   taskCount = 0;
 
@@ -101,5 +119,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       this.avgDuration = Math.round(commonDuration / rowData.length) || 0;
     });
+  }
+  closeButtonOptions: any;
+  popupVisible = false;
+  showInfo() {
+    this.popupVisible = true;
   }
 }

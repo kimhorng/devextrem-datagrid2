@@ -10,10 +10,15 @@ import {
   DxSelectBoxModule,
   DxTabPanelModule,
   DxButtonModule,
+  DxPopupModule,
+  DxTextAreaModule,
+  DxTooltipModule,
+  DxContextMenuModule,
 } from 'devextreme-angular';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +28,10 @@ import {
     DxSelectBoxModule,
     DxTabPanelModule,
     DxButtonModule,
+    DxPopupModule,
+    DxTextAreaModule,
+    DxTooltipModule,
+    DxContextMenuModule,
     HttpClientModule,
   ],
   providers: [],

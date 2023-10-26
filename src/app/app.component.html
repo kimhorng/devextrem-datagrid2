@@ -27,7 +27,76 @@
         ></dxi-column>
         <dxi-column dataField="overview"></dxi-column>
         <dxi-column dataField="vote_count"></dxi-column>
-        <dxi-column dataField="vote_average"></dxi-column>
+        <dxi-column dataField="vote_average" cellTemplate="cellTemplate">
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <!-- <div *ngFor="let actionButton of actionButtons">
+              <dx-button
+                [icon]="actionButton.icon"
+                [id]="actionButton.id"
+              ></dx-button>
+              <dx-tooltip
+                [target]="'#' + actionButton.id"
+                showEvent="dxhoverstart"
+                hideEvent="dxhoverend"
+                position="left"
+              >
+                <div *dxTemplate="let data of 'content'">
+                  <p>{{ actionButton.tooltip }}</p>
+                </div>
+              </dx-tooltip>
+            </div> -->
+            <div>
+              <dx-button
+                icon="filter"
+                id="preview"
+                (onClick)="isContextMenuVisible = true"
+              ></dx-button>
+              <dx-context-menu
+                [(visible)]="isContextMenuVisible"
+                [dataSource]="dataSource"
+                [width]="200"
+                target="#preview"
+              >
+                <div *dxTemplate="let e of 'item'">
+                  <div>
+                    <span [ngClass]="e.icon"></span>
+                    <span *ngIf="e.items" class="dx-icon-spinright"></span>
+                    {{ e.text }}
+                  </div>
+                </div>
+              </dx-context-menu>
+              <dx-tooltip
+                target="#preview"
+                showEvent="dxhoverstart"
+                hideEvent="dxhoverend"
+                position="left"
+              >
+                <div *dxTemplate="let data of 'content'">
+                  <p>Preview</p>
+                </div>
+              </dx-tooltip>
+            </div>
+
+            <div>
+              <dx-button
+                icon="filter"
+                id="note"
+                (onClick)="showInfo()"
+              ></dx-button>
+
+              <dx-tooltip
+                target="#note"
+                showEvent="dxhoverstart"
+                hideEvent="dxhoverend"
+                position="left"
+              >
+                <div *dxTemplate="let data of 'content'">
+                  <p>note</p>
+                </div>
+              </dx-tooltip>
+            </div>
+          </div>
+        </dxi-column>
         <dxi-column dataField="popularity" dataType="date"></dxi-column>
 
         <dxo-summary>
@@ -72,10 +141,39 @@
         caption="Status"
         dataField="Task_Status"
         width="auto"
-      ></dxi-column>
+        cellTemplate="cellTemplate"
+      >
+        <div *dxTemplate="let cellData of 'cellTemplate'">
+          <dx-button icon="filter"></dx-button>
+        </div>
+      </dxi-column>
     </dx-data-grid>
   </dxi-item>
   <dxi-item title="Hidden List">
     <!-- ... -->
   </dxi-item>
 </dx-tab-panel>
+<dx-popup
+  [(visible)]="popupVisible"
+  [showCloseButton]="true"
+  [showTitle]="true"
+  title="Information"
+  [width]="700"
+  [height]="400"
+>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="top"
+    locateInMenu="always"
+    [options]="moreInfoButtonOptions"
+  ></dxi-toolbar-item>
+  <app-dialog></app-dialog>
+</dx-popup>
+<!-- <dx-button text="Open the context menu" (onClick)="isContextMenuVisible = true">
+</dx-button>
+<dx-context-menu
+  [items]="contextMenuItems"
+  target="#someElement"
+  [(visible)]="isContextMenuVisible"
+>
+</dx-context-menu> -->
