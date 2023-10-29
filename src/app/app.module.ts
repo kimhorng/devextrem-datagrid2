@@ -14,6 +14,7 @@ import {
   DxTextAreaModule,
   DxTooltipModule,
   DxContextMenuModule,
+  DxToolbarModule,
 } from 'devextreme-angular';
 import { DialogComponent } from './components/dialog/dialog.component';
 
@@ -32,6 +33,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     DxTextAreaModule,
     DxTooltipModule,
     DxContextMenuModule,
+    DxToolbarModule,
     HttpClientModule,
   ],
   providers: [],

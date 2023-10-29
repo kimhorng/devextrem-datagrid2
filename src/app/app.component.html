@@ -130,16 +130,9 @@
         </dxi-column>
         <!-- <dxi-column dataField="popularity" dataType="date"></dxi-column> -->
 
-        <dxo-editing
-          mode="row"
-          [allowUpdating]="true"
-          [allowDeleting]="true"
-          [allowAdding]="true"
-          [useIcons]="true"
-          mode="popup"
-        >
+        <dxo-editing mode="popup" [allowUpdating]="true">
           <dxo-popup
-            title="Employee Info"
+            title="Note"
             [showTitle]="true"
             [width]="700"
             [height]="700"
@@ -147,7 +140,13 @@
           </dxo-popup>
           <dxo-form>
             <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
-              <dxi-item dataField="popularity" dataType="date"></dxi-item>
+              <dxi-item
+                dataField="overview"
+                editorType="dxTextArea"
+                [colSpan]="2"
+                [editorOptions]="{ height: 100 }"
+              >
+              </dxi-item>
             </dxi-item>
           </dxo-form>
         </dxo-editing>
@@ -170,6 +169,10 @@
           >
           </dxi-total-item>
         </dxo-summary>
+        <!-- <dx-toolbar>
+          <dxi-item widget="dxCheckBox" [options]="{ text: 'Show IDs' }">
+          </dxi-item>
+        </dx-toolbar> -->
       </dx-data-grid>
     </div>
   </dxi-item>
