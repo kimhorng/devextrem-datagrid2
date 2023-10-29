@@ -19,6 +19,18 @@
         </dxo-pager>
         <dxo-search-panel [visible]="true"></dxo-search-panel>
         <dxo-selection mode="multiple"></dxo-selection>
+
+        <!-- <dxi-column
+          type="buttons"
+          [width]="110"
+          headerCellTemplate="header-cell-template"
+        >
+          <dxi-button name="edit"></dxi-button>
+          <dxi-button name="delete"></dxi-button>
+        </dxi-column>
+        <div *dxTemplate="let data of 'header-cell-template'">
+          <i class="dx-icon-email"></i>
+        </div> -->
         <dxi-column dataField="id" caption="ID" [width]="90"></dxi-column>
         <dxi-column dataField="title"></dxi-column>
         <dxi-column
@@ -27,6 +39,7 @@
         ></dxi-column>
         <dxi-column dataField="overview"></dxi-column>
         <dxi-column dataField="vote_count"></dxi-column>
+
         <dxi-column dataField="vote_average" cellTemplate="cellTemplate">
           <div *dxTemplate="let data of 'cellTemplate'">
             <!-- <div *ngFor="let actionButton of actionButtons">
@@ -79,7 +92,7 @@
 
             <div>
               <dx-button
-                icon="filter"
+                [text]="data.value"
                 id="note"
                 (onClick)="showInfo()"
               ></dx-button>
@@ -94,10 +107,58 @@
                   <p>note</p>
                 </div>
               </dx-tooltip>
+
+              <dx-popup
+                [(visible)]="popupVisible"
+                [showCloseButton]="true"
+                [showTitle]="true"
+                title="Note"
+                [width]="700"
+                [height]="400"
+              >
+                <dxi-toolbar-item
+                  widget="dxButton"
+                  toolbar="top"
+                  locateInMenu="always"
+                  [options]="moreInfoButtonOptions"
+                ></dxi-toolbar-item>
+                <app-dialog></app-dialog>
+                <p>{{ data.value }}</p>
+              </dx-popup>
             </div>
           </div>
         </dxi-column>
-        <dxi-column dataField="popularity" dataType="date"></dxi-column>
+        <!-- <dxi-column dataField="popularity" dataType="date"></dxi-column> -->
+
+        <dxo-editing
+          mode="row"
+          [allowUpdating]="true"
+          [allowDeleting]="true"
+          [allowAdding]="true"
+          [useIcons]="true"
+          mode="popup"
+        >
+          <dxo-popup
+            title="Employee Info"
+            [showTitle]="true"
+            [width]="700"
+            [height]="700"
+          >
+          </dxo-popup>
+          <dxo-form>
+            <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+              <dxi-item dataField="popularity" dataType="date"></dxi-item>
+            </dxi-item>
+          </dxo-form>
+        </dxo-editing>
+        <dxi-column
+          type="buttons"
+          [width]="110"
+          headerCellTemplate="header-cell-template"
+        >
+          <dxi-button name="edit"></dxi-button>
+        </dxi-column>
+        <div *dxTemplate="let data of 'header-cell-template'">Action</div>
 
         <dxo-summary>
           <dxi-total-item
@@ -153,22 +214,7 @@
     <!-- ... -->
   </dxi-item>
 </dx-tab-panel>
-<dx-popup
-  [(visible)]="popupVisible"
-  [showCloseButton]="true"
-  [showTitle]="true"
-  title="Information"
-  [width]="700"
-  [height]="400"
->
-  <dxi-toolbar-item
-    widget="dxButton"
-    toolbar="top"
-    locateInMenu="always"
-    [options]="moreInfoButtonOptions"
-  ></dxi-toolbar-item>
-  <app-dialog></app-dialog>
-</dx-popup>
+
 <!-- <dx-button text="Open the context menu" (onClick)="isContextMenuVisible = true">
 </dx-button>
 <dx-context-menu
