@@ -34,3 +34,16 @@
 ::ng-deep .dx-template-wrapper {
   display: flex;
 }
+
+.stepper {
+  width: 500px;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.232);
+  padding: 30px;
+
+  .btn {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -1,4 +1,4 @@
-<dx-tab-panel>
+<!-- <dx-tab-panel>
   <dxi-item title="Entire List">
     <div *dxTemplate>
       <dx-data-grid
@@ -20,7 +20,7 @@
         <dxo-search-panel [visible]="true"></dxo-search-panel>
         <dxo-selection mode="multiple"></dxo-selection>
 
-        <!-- <dxi-column
+         <dxi-column
           type="buttons"
           [width]="110"
           headerCellTemplate="header-cell-template"
@@ -30,7 +30,7 @@
         </dxi-column>
         <div *dxTemplate="let data of 'header-cell-template'">
           <i class="dx-icon-email"></i>
-        </div> -->
+        </div> 
         <dxi-column dataField="id" caption="ID" [width]="90"></dxi-column>
         <dxi-column dataField="title"></dxi-column>
         <dxi-column
@@ -42,7 +42,7 @@
 
         <dxi-column dataField="vote_average" cellTemplate="cellTemplate">
           <div *dxTemplate="let data of 'cellTemplate'">
-            <!-- <div *ngFor="let actionButton of actionButtons">
+            <div *ngFor="let actionButton of actionButtons">
               <dx-button
                 [icon]="actionButton.icon"
                 [id]="actionButton.id"
@@ -57,7 +57,7 @@
                   <p>{{ actionButton.tooltip }}</p>
                 </div>
               </dx-tooltip>
-            </div> -->
+            </div>
             <div>
               <dx-button
                 icon="filter"
@@ -128,7 +128,7 @@
             </div>
           </div>
         </dxi-column>
-        <!-- <dxi-column dataField="popularity" dataType="date"></dxi-column> -->
+        <dxi-column dataField="popularity" dataType="date"></dxi-column>
 
         <dxo-editing mode="popup" [allowUpdating]="true">
           <dxo-popup
@@ -169,10 +169,10 @@
           >
           </dxi-total-item>
         </dxo-summary>
-        <!-- <dx-toolbar>
+        <dx-toolbar>
           <dxi-item widget="dxCheckBox" [options]="{ text: 'Show IDs' }">
           </dxi-item>
-        </dx-toolbar> -->
+        </dx-toolbar>
       </dx-data-grid>
     </div>
   </dxi-item>
@@ -183,7 +183,7 @@
       [showBorders]="true"
     >
       <dxo-selection mode="multiple" [deferred]="true"></dxo-selection>
-      <!-- <dxo-filter-row [visible]="true"></dxo-filter-row> -->
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
       <dxi-column caption="Subject" dataField="Task_Subject"></dxi-column>
       <dxi-column
         caption="Start Date"
@@ -216,11 +216,10 @@
     </dx-data-grid>
   </dxi-item>
   <dxi-item title="Hidden List">
-    <!-- ... -->
   </dxi-item>
 </dx-tab-panel>
 
-<!-- <dx-button text="Open the context menu" (onClick)="isContextMenuVisible = true">
+<dx-button text="Open the context menu" (onClick)="isContextMenuVisible = true">
 </dx-button>
 <dx-context-menu
   [items]="contextMenuItems"
@@ -228,3 +227,19 @@
   [(visible)]="isContextMenuVisible"
 >
 </dx-context-menu> -->
+
+<div class="stepper">
+  <ng-template let-stepper [ngIf]="sItemsList[stepIndex]">
+    <p>{{ stepper.title }}</p>
+    <p>{{ stepper.content }}</p>
+  </ng-template>
+  <div class="btn">
+    <dx-button [disabled]="disablePre" text="Previous" (onClick)="nextStep(-1)">
+    </dx-button>
+    <dx-button
+      text="Next"
+      [disabled]="disableNext"
+      (onClick)="nextStep(1)"
+    ></dx-button>
+  </div>
+</div>

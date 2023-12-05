@@ -6,6 +6,7 @@ import { Toolbar } from 'devextreme/ui/data_grid';
 import { DxDataGridComponent } from 'devextreme-angular';
 import query from 'devextreme/data/query';
 import 'devextreme/data/odata/store';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -124,5 +125,39 @@ export class AppComponent implements OnInit, AfterViewInit {
   popupVisible = false;
   showInfo() {
     this.popupVisible = true;
+  }
+
+  sItemsList = [
+    {
+      title: 'Title 1',
+      content: 'this is the first conents',
+    },
+    {
+      title: 'Title 2',
+      content: 'this is the second conents',
+    },
+    {
+      title: 'Title 3',
+      content: 'this is the third conents',
+    },
+  ];
+  stepIndex: number = 0;
+  disablePre = true;
+  disableNext = false;
+
+  nextStep(n: number) {
+    this.stepIndex = this.stepIndex + n;
+    console.log(this.stepIndex);
+    this.disablePre = false;
+
+    if (this.stepIndex === 0) {
+      this.disablePre = true;
+      this.disableNext = false;
+    } else if (this.stepIndex >= this.sItemsList.length - 1) {
+      this.stepIndex = this.sItemsList.length - 1;
+      this.disableNext = true;
+    } else {
+      this.disableNext = false;
+    }
   }
 }
