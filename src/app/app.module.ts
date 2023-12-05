@@ -17,9 +17,11 @@ import {
   DxToolbarModule,
 } from 'devextreme-angular';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ButtonRendererComponent } from './components/button/btn-cell-renderer.component';
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent],
+  declarations: [AppComponent, DialogComponent, ButtonRendererComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,6 +37,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     DxContextMenuModule,
     DxToolbarModule,
     HttpClientModule,
+    AgGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
